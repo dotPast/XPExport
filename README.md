@@ -1,5 +1,5 @@
 # XPUtils
-Small plugin for player XP
+Small plugin for player XP (in russian translations planned)
 
 ## Commands
 `/exportxp (amount/all)` - Export your XP to bottles. Doesn't require bottles in your inventory
