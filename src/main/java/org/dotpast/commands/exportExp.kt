@@ -11,11 +11,11 @@ import org.bukkit.inventory.ItemStack
 class ExportExp : CommandExecutor{
     override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<out String>): Boolean {
         if (sender !is Player) {
-            Bukkit.getLogger().info("Консоль не может использовать эту команду")
+            Bukkit.getLogger().info("Consloe can't use this command")
             return false
         }
         if (args.isEmpty()) {
-            sender.sendMessage("§cВы не указали кол-во бутылок")
+            sender.sendMessage("§cYou didn't specify amount of bottles")
             return false
         }
 
@@ -24,11 +24,11 @@ class ExportExp : CommandExecutor{
             val bottles = playerExp.floorDiv(7)
             val cost = bottles*7
             if (cost>playerExp) {
-                sender.sendMessage("§cНедостаточно опыта (${cost}>${playerExp}).")
+                sender.sendMessage("§cNot enough XP (${cost}>${playerExp}).")
             } else {
                 sender.giveExp(-cost)
                 sender.inventory.addItem(ItemStack(Material.EXPERIENCE_BOTTLE, bottles))
-                sender.sendMessage("§aУспешно выданно $bottles бутылок! (~${cost} опыта)")
+                sender.sendMessage("§aSuccessfully gave $bottles XP bottles! (~${cost} XP)")
             }
             return true
 
@@ -40,14 +40,14 @@ class ExportExp : CommandExecutor{
             val cost = bottles*7
             val playerExp = sender.totalExperience
             if (cost>playerExp) {
-                sender.sendMessage("§cНедостаточно опыта (${cost}>${playerExp}). \nМаксимально возможное количество: ${playerExp.floorDiv(7)}")
+                sender.sendMessage("§cNot enough XP (${cost}>${playerExp}). \nMax. Amount: ${playerExp.floorDiv(7)}")
             } else {
                 sender.giveExp(-cost)
                 sender.inventory.addItem(ItemStack(Material.EXPERIENCE_BOTTLE, bottles))
-                sender.sendMessage("§aУспешно выданно $bottles бутылок! (~${cost} опыта)")
+                sender.sendMessage("§aSuccessfully gave $bottles XP bottles! (~${cost} XP)")
             }
         } catch (e: NumberFormatException) {
-            sender.sendMessage("§cВы указали не число")
+            sender.sendMessage("§cAmount is not a number or all")
             return false
         }
 
