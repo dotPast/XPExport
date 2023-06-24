@@ -1,0 +1,15 @@
+name: XPUtils
+version: '1.0'
+main: org.dotpast.XPUtils
+api-version: '1.20'
+commands:
+  exportxp:
+    description: Экспортировать опыт в бутылки
+    usage: /<command> (количество или all)
+    aliases:
+      - exportexp
+  currentxp:
+    description: Показать текущий опыт
+    usage: /<command>
+    aliases:
+      - currentexp
