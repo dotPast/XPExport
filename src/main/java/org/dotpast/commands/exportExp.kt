@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack
 class ExportExp : CommandExecutor{
     override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<out String>): Boolean {
         if (sender !is Player) {
-            Bukkit.getLogger().info("Consloe can't use this command")
+            Bukkit.getLogger().info("Console can't use this command")
             return false
         }
         if (args.isEmpty()) {
