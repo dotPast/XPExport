@@ -17,7 +17,7 @@ class CurrentExp : CommandExecutor {
         val playerExp = sender.totalExperience
         val maxBottles = playerExp.floorDiv(7)
 
-        sender.sendMessage("§aYour XP: $playerExp (${maxBottles} bottles, ${maxBottles.floorDiv(64)} stacks)")
+        sender.sendMessage("§aYour XP: $playerExp (${maxBottles} bottles, ${maxBottles.floorDiv(64)}+ stacks)")
 
         return true
     }
