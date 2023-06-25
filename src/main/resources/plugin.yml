@@ -4,12 +4,12 @@ main: org.dotpast.XPUtils
 api-version: '1.20'
 commands:
   exportxp:
-    description: Экспортировать опыт в бутылки
-    usage: /<command> (количество или all)
+    description: Export XP into bottles
+    usage: /<command> (amount/all)
     aliases:
       - exportexp
   currentxp:
-    description: Показать текущий опыт
+    description: Show current XP
     usage: /<command>
     aliases:
       - currentexp
