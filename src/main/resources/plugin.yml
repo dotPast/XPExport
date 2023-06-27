@@ -1,11 +1,11 @@
 name: XPUtils
-version: '1.0'
+version: '1.2'
 main: org.dotpast.XPUtils
 api-version: '1.20'
 commands:
   exportxp:
     description: Export XP into bottles
-    usage: /<command> (amount/all)
+    usage: /<command> (amount of bottles/all)
     aliases:
       - exportexp
   currentxp:
@@ -13,3 +13,8 @@ commands:
     usage: /<command>
     aliases:
       - currentexp
+  transferxp:
+    description: Transfer XP to other player
+    usage: /<command> (amount/all) (player)
+    aliases:
+      - transferexp
