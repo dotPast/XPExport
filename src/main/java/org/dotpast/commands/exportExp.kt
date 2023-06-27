@@ -9,6 +9,16 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
 class ExportExp : CommandExecutor{
+    fun getFreeSlots(player: Player): Int {
+        var freeSlots = 0
+        for (item in player.inventory.contents) {
+            if (item == null) {
+                freeSlots++
+            }
+        }
+        return (freeSlots-5)*64
+    }
+
     override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<out String>): Boolean {
         if (sender !is Player) {
             Bukkit.getLogger().info("Console can't use this command")
@@ -23,6 +33,12 @@ class ExportExp : CommandExecutor{
             val playerExp = sender.totalExperience
             val bottles = playerExp.floorDiv(7)
             val cost = bottles*7
+
+            if (bottles>getFreeSlots(sender)) {
+                sender.sendMessage("§cNot enough free inventory space. ($bottles>${getFreeSlots(sender)})")
+                return false
+            }
+
             if (cost>playerExp) {
                 sender.sendMessage("§cNot enough XP (${cost}>${playerExp}).")
             } else {
@@ -39,6 +55,12 @@ class ExportExp : CommandExecutor{
             val bottles = args[0].toInt()
             val cost = bottles*7
             val playerExp = sender.totalExperience
+
+            if (bottles>getFreeSlots(sender)) {
+                sender.sendMessage("§cNot enough free inventory space. ($bottles>${getFreeSlots(sender)})")
+                return false
+            }
+
             if (cost>playerExp) {
                 sender.sendMessage("§cNot enough XP (${cost}>${playerExp}). \nMax. Amount: ${playerExp.floorDiv(7)}")
             } else {
