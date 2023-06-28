@@ -19,8 +19,15 @@ class TransferExp : CommandExecutor {
 
         val transferTo = Bukkit.getPlayer(args[1])
 
-        if (transferTo == null) {
-            sender.sendMessage("§cPlayer is offline")
+        val transferTo = try {
+            Bukkit.getPlayer(args[1])
+        } catch (e: ArrayIndexOutOfBoundsException) {
+            sender.sendMessage("§cYou didn't specify the player or player is offline")
+            return false
+        }
+
+        if (transferTo == sender) {
+            sender.sendMessage("§cYou can't give XP to yourself")
             return false
         }
 
