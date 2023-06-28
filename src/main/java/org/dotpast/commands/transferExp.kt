@@ -17,8 +17,6 @@ class TransferExp : CommandExecutor {
             return false
         }
 
-        val transferTo = Bukkit.getPlayer(args[1])
-
         val transferTo = try {
             Bukkit.getPlayer(args[1])
         } catch (e: ArrayIndexOutOfBoundsException) {
@@ -34,7 +32,7 @@ class TransferExp : CommandExecutor {
         if (args[0] == "all") {
             val playerExp = sender.totalExperience
             sender.giveExp(-playerExp)
-            sender.sendMessage("§aSuccessfully gave $playerExp XP to ${transferTo.name}!")
+            sender.sendMessage("§aSuccessfully gave $playerExp XP to ${transferTo!!.name}!")
             transferTo.giveExp(playerExp)
             transferTo.sendMessage("§a${sender.name} just gave you $playerExp XP!")
             return true
@@ -47,7 +45,7 @@ class TransferExp : CommandExecutor {
             sender.sendMessage("§cNot enough XP (${cost} > ${playerExp}).")
         } else {
             sender.giveExp(-cost)
-            sender.sendMessage("§aSuccessfully gave $cost XP to ${transferTo.name}!")
+            sender.sendMessage("§aSuccessfully gave $cost XP to ${transferTo!!.name}!")
             transferTo.giveExp(cost)
             transferTo.sendMessage("§a${sender.name} just gave you $cost XP!")
         }
