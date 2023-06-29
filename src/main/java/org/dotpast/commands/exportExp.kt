@@ -9,14 +9,15 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
 class ExportExp : CommandExecutor{
-    fun getFreeSlots(player: Player): Int {
+    private fun getFreeSlots(player: Player): Int {
         var freeSlots = 0
-        for (item in player.inventory.contents) {
-            if (item == null) {
+        for (i in 0 until player.inventory.size) {
+            val item = player.inventory.getItem(i)
+            if (item == null && i !in 36..40) { // exclude armor and second hand slots
                 freeSlots++
             }
         }
-        return (freeSlots-5)*64
+        return freeSlots*64
     }
 
     override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<out String>): Boolean {
@@ -31,12 +32,16 @@ class ExportExp : CommandExecutor{
 
         if (args[0] == "all") {
             val playerExp = sender.totalExperience
-            val bottles = playerExp.floorDiv(7)
-            val cost = bottles*7
+            var bottles = playerExp.floorDiv(7)
+            var cost = bottles*7
 
             if (bottles>getFreeSlots(sender)) {
-                sender.sendMessage("§cNot enough free inventory space. ($bottles>${getFreeSlots(sender)})")
-                return false
+                bottles = getFreeSlots(sender)
+                cost = bottles*7
+                sender.giveExp(-cost)
+                sender.inventory.addItem(ItemStack(Material.EXPERIENCE_BOTTLE, bottles))
+                sender.sendMessage("§aSuccessfully gave $bottles XP bottles! (~${cost} XP)")
+                return true
             }
 
             if (cost>playerExp) {
