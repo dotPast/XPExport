@@ -8,6 +8,8 @@ XPUtils (formerly XPExport) is a small plugin for player XP
 
 `/transferxp (amount/all) (player)` -  Give XP to other player
 
+`/getxp (amount/all)` - Convert XP bottles into xp
+
 ## (Probably) Unstable Builds
 Unstable builds are located in https://github.com/dotPast/XPUtils/actions inside of `artifact.zip`
 
