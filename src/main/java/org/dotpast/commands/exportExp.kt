@@ -13,7 +13,7 @@ class ExportExp : CommandExecutor{
         var freeSlots = 0
         for (i in 0 until player.inventory.size) {
             val item = player.inventory.getItem(i)
-            if (item == null && i !in 36..40) { // exclude armor and second hand slots
+            if (item == null && i !in 36..40) {
                 freeSlots++
             }
         }

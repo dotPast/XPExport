@@ -5,6 +5,7 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import java.lang.NumberFormatException
 
 class TransferExp : CommandExecutor {
     override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<out String>?): Boolean {
@@ -38,17 +39,24 @@ class TransferExp : CommandExecutor {
             return true
         }
 
-        val cost = args[0].toInt()
-        val playerExp = sender.totalExperience
+        try {
+            val cost = args[0].toInt()
+            val playerExp = sender.totalExperience
 
-        if (cost > playerExp) {
-            sender.sendMessage("§cNot enough XP (${cost} > ${playerExp}).")
-        } else {
-            sender.giveExp(-cost)
-            sender.sendMessage("§aSuccessfully gave $cost XP to ${transferTo!!.name}!")
-            transferTo.giveExp(cost)
-            transferTo.sendMessage("§a${sender.name} just gave you $cost XP!")
+            if (cost > playerExp) {
+                sender.sendMessage("§cNot enough XP (${cost} > ${playerExp}).")
+            } else {
+                sender.giveExp(-cost)
+                sender.sendMessage("§aSuccessfully gave $cost XP to ${transferTo!!.name}!")
+                transferTo.giveExp(cost)
+                transferTo.sendMessage("§a${sender.name} just gave you $cost XP!")
+            }
+
+        } catch (e: NumberFormatException) {
+            sender.sendMessage("§cFirst argument is not a number")
+            return false
         }
+
 
         return true
     }
