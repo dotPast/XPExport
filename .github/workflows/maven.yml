@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: Build Plugin
 
 on:
   push:
@@ -27,10 +27,10 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
+    - name: Build
       run: mvn -B package --file pom.xml
       
-    - name: Upload a Build Artifact
+    - name: Upload target Folder
       uses: actions/upload-artifact@v3.1.2
       with:
-        path: target/XPUtils.jar
+        path: target
